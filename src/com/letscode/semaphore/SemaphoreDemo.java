@@ -3,7 +3,7 @@ package com.letscode.semaphore;
 import java.util.concurrent.Semaphore;
 
 public class SemaphoreDemo {
-    static Semaphore semaphore = new Semaphore(2);
+    static Semaphore semaphore = new Semaphore(3);
 
     public static void main(String[] args) throws InterruptedException {
         execute();
@@ -14,12 +14,14 @@ public class SemaphoreDemo {
         System.out.println("Available permit : " + semaphore.availablePermits());
         System.out.println("Number of threads waiting to acquire: " + semaphore.getQueueLength());
 
-        semaphore.acquire();
+
         if (semaphore.tryAcquire()) {
             try {
+                semaphore.acquire();
                 System.out.println("Available permit : " + semaphore.availablePermits());
                 System.out.println("Number of threads waiting to acquire: " + semaphore.getQueueLength());
             } finally {
+
                 semaphore.release();
             }
         }else {
